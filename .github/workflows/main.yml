@@ -21,6 +21,8 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: ${{ matrix.arch }}
+      - run: |
+          mv nasm.exe C:\Windows\System32
       - uses: actions/setup-python@v1
       - uses: BSFishy/meson-build@v1.0.3
         with:
