@@ -1,0 +1,28 @@
+on:
+  push:
+    branches: [ "forjpegview" ]
+  pull_request:
+    branches: [ "forjpegview" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2019
+    
+    # Run a job for each of the specified target architectures:
+    strategy:
+      matrix:
+        arch:
+          - win64
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch }}
+      - uses: actions/setup-python@v1
+      - uses: BSFishy/meson-build@v1.0.3
+        with:
+          action: install
+      # ...
